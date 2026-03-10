@@ -161,7 +161,7 @@ Func MoveTo($x,$y,$move_type="jump",$distance=2)
 
 			Case IsArray($check_box)
 				Move_Off()
-				Sleep(1000)
+;~ 				Sleep(1000)
 ;~ 				$check_box = PixelSearch( $x1_box,  $y1_box, $x2_box, $y2_box,$charColor)
 ;~ 				If Not IsArray($check_box) Then
 ;~ 					ContinueLoop
@@ -196,20 +196,22 @@ Func MoveTo($x,$y,$move_type="jump",$distance=2)
 				Move_Off()
 				If $move_type == "flash" Then
 					Down_Flash()
+					Sleep(300)
 				Else
 					Jump_Down()
+					Sleep(1000)
 				EndIf
-				Sleep(1000)
 
 			Case $myPosition[1] > $y2_box
 				Move_Off()
 				If $move_type == "flash"  Then
 					Up_Flash()
+					Sleep(300)
 				Else
 					Rope_Lift()
+					Sleep(1000)
 				EndIf
 
-				Sleep(1000)
 		EndSelect
 		$oldPosition = $myPosition
 		Sleep(10)

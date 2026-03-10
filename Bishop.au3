@@ -14,7 +14,7 @@ Func Play()
 	Local $left_x = 40, $left_y = 152
 	Local $right_x = 155, $right_y = 152
 
-	Local $orb_x = 44, $orb_y = 136
+	Local $orb_x = 47, $orb_y = 136
 	Local $janus_1_x = 97, $janus_1_y = 136
 	Local $janus_2_x = 142, $janus_2_y = 136
 	While 1
@@ -53,12 +53,14 @@ Func Play()
 ;~ 				Send("e")
 ;~ 				$orb_time = TimerInit()
 
-			Case TimerDiff($janus_time) > 65000
+			Case TimerDiff($janus_time) > 60000
 				MoveTo($orb_x,$orb_y,"flash",3)
+				Send("r")
+				Sleep(1000)
 				Send("e")
-				MoveTo($janus_1_x,$janus_1_y,3)
+				MoveTo($janus_1_x,$janus_1_y,"flash",3)
 				Send("a")
-				MoveTo($janus_2_x,$janus_2_y,3)
+				MoveTo($janus_2_x,$janus_2_y,"flash",3)
 				Send("a")
 				$janus_time = TimerInit()
 

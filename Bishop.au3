@@ -32,7 +32,8 @@ Func Play()
 
 		Select
 			Case (IsArray($runeCheck) And TimerDiff($rune_time) > 15*60*1000) Or $first_rune == True
-				GetRune($runeCheck[0],$runeCheck[1])
+				MoveTo($runeCheck[0],$runeCheck[1],"flash")
+				GetRune()
 				$rune_check = RuneCheck()
 				If $rune_check == False Then
 					$rune_time = TimerInit()
@@ -47,28 +48,25 @@ Func Play()
 				Sleep(500)
 				Send("3")
 				$drug_time = TimerInit()
-			Case TimerDiff($orb_time) > 40000
-				MoveTo($orb_x,$orb_y)
-				turn_right()
-				Sleep(300)
-				jump()
-				Sleep(100)
-				Send("r")
-				$orb_time = TimerInit()
-				Sleep(200)
+;~ 			Case TimerDiff($orb_time) > 40000
+;~ 				MoveTo($orb_x,$orb_y)
+;~ 				Send("e")
+;~ 				$orb_time = TimerInit()
 
 			Case TimerDiff($janus_time) > 65000
-				MoveTo($janus_1_x,$janus_1_y)
+				MoveTo($orb_x,$orb_y,"flash",3)
+				Send("e")
+				MoveTo($janus_1_x,$janus_1_y,3)
 				Send("a")
-				MoveTo($janus_2_x,$janus_2_y)
+				MoveTo($janus_2_x,$janus_2_y,3)
 				Send("a")
 				$janus_time = TimerInit()
 
 			Case $atk_direct == False
-				Left_Jump_Atk_au3()
+				Left_Flash_Atk()
 
 			Case $atk_direct == True
-				Right_Jump_Atk_au3()
+				Right_Flash_Atk()
 		EndSelect
 		Sleep(50)
 	WEnd
@@ -78,9 +76,13 @@ EndFunc
 ;97,136
 ;~ 142,135
 Func Test()
+;~ 	Up_Flash()
+	Local $orb_x = 44, $orb_y = 136
+	MoveTo($orb_x,$orb_y,"flash")
+;~ 	showMyPosition()
 ;~ 	Left_Jump_Atk_au3()
 ;~ 	turn_left()
-	Left_Flash_Atk()
+;~ 	Left_Flash_Atk()
 ;~ 	$runePosition = runePosition()
 ;~ 	If IsArray($runePosition) Then
 ;~ 		GetRune($runePosition[0],$runePosition[1])

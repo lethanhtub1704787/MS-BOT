@@ -71,9 +71,7 @@ EndFunc
 ;~ $y2 = 400
 ;~ Local $imgPath = @ScriptDir & "\rune.png"
 ;~ CaptureRegion($imgPath, $x1, $y1, $x2, $y2)
-Func GetRune($x,$y)
-	MoveTo($x,$y)
-	Sleep(500)
+Func GetRune()
 	Send("{SPACE}")
 	Sleep(1500)
 	Local $imgName = "rune.png"
@@ -127,34 +125,15 @@ Func GetRune($x,$y)
 			Case $arr[$i] == 3
 				Send("{DOWN}")
 		EndSelect
-		Sleep(250)
+		Sleep(150)
 	Next
-;~ 		$arr[$i] = Int($arr[$i])
-
-;~ 	MsgBox("","",$arr)
-
-
-;~ 	If UBound($recv) > 0 Then
-;~ 		For $each In $recv
-;~ 			Select
-;~ 				Case $each == 0
-;~ 					MsgBox("","","left")
-;~ 				Case $each == 1
-;~ 					MsgBox("","","right")
-;~ 				Case $each == 2
-;~ 					MsgBox("","","up")
-;~ 				Case $each == 3
-;~ 					MsgBox("","","down")
-;~ 			EndSelect
-;~ 		Next
-;~ 	EndIf
 
 EndFunc
 
-Func MoveTo($x,$y,$move_type="jump")
-	$x1_box = $x - 2
+Func MoveTo($x,$y,$move_type="jump",$distance=2)
+	$x1_box = $x - $distance
 	$y1_box = $y - 2
-	$x2_box = $x + 2
+	$x2_box = $x + $distance
 	$y2_box = $y + 2
 
 	Local $stuck_time = TimerInit()
@@ -176,6 +155,7 @@ Func MoveTo($x,$y,$move_type="jump")
 ;~ 				$time = TimerInit()
 
 			Case TimerDiff($stuck_time) > 3000
+				Move_Off()
 				Right_Jump()
 				$stuck_time = TimerInit()
 
@@ -189,7 +169,7 @@ Func MoveTo($x,$y,$move_type="jump")
 				ExitLoop
 
 			Case $myPosition[0] < $x1_box
-				Move_Off()
+				Left_Move_Off()
 				If $x1_box - $myPosition[0] >= 30 Then
 					If $move_type == "flash" Then
 						Right_Flash()
@@ -201,7 +181,7 @@ Func MoveTo($x,$y,$move_type="jump")
 				EndIf
 
 			Case $myPosition[0] > $x2_box
-				Move_Off()
+				Right_Move_Off()
 				If $myPosition[0] - $x2_box >= 30 Then
 					If $move_type == "flash" Then
 						Left_Flash()
@@ -213,22 +193,18 @@ Func MoveTo($x,$y,$move_type="jump")
 				EndIf
 
 			Case $myPosition[1] < $y1_box
+				Move_Off()
 				If $move_type == "flash" Then
-;~ 					Jump_Down()
-;~ 					Sleep(300)
-;~ 					Down_Flash()
+					Down_Flash()
 				Else
 					Jump_Down()
 				EndIf
 				Sleep(1000)
 
 			Case $myPosition[1] > $y2_box
+				Move_Off()
 				If $move_type == "flash"  Then
-;~ 					If $myPosition[1] - $y > 20 Then
-;~ 						high_jump_flash()
-;~ 					Else
-;~ 						jump_flash()
-;~ 					EndIf
+					Up_Flash()
 				Else
 					Rope_Lift()
 				EndIf
@@ -236,7 +212,7 @@ Func MoveTo($x,$y,$move_type="jump")
 				Sleep(1000)
 		EndSelect
 		$oldPosition = $myPosition
-		Sleep(100)
+		Sleep(10)
 	WEnd
 EndFunc
 
@@ -273,13 +249,55 @@ Func Jump()
     SendKey("c")
 EndFunc
 
+Func Left_Flash_Atk()
+	Send("{LEFT down}")
+	Sleep(50)
+	Send("d")
+	Sleep(50)
+	Attack()
+	Send("{LEFT up}")
+EndFunc
+
+Func Right_Flash_Atk()
+	Send("{RIGHT down}")
+	Sleep(50)
+	Send("d")
+	Sleep(50)
+	Attack()
+	Send("{RIGHT up}")
+EndFunc
+
+
 Func Right_Flash()
+	Send("{RIGHT down}")
+	Sleep(100)
+	Send("d")
+	Sleep(100)
+	Send("{RIGHT up}")
 EndFunc
 
 Func Left_Flash()
+	Send("{LEFT down}")
+	Sleep(100)
+	Send("d")
+	Sleep(100)
+	Send("{LEFT up}")
 EndFunc
 
 Func Down_Flash()
+	Send("{DOWN down}")
+	Sleep(50)
+	Send("d")
+	Sleep(50)
+	Send("{DOWN up}")
+EndFunc
+
+Func Up_Flash()
+	Send("{UP down}")
+	Sleep(50)
+	Send("d")
+	Sleep(50)
+	Send("{UP up}")
 EndFunc
 
 Func Jump_Up()

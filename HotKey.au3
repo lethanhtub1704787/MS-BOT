@@ -11,6 +11,7 @@ HotKeySet("{F5}", "Terminate")
 HotKeySet("+!d", "ShowMessage") ; Shift-Alt-d
 
 Run_AI_Server()
+WinMove("[CLASS:MapleStoryClass]", "", 0,0)
 
 While 1
     Sleep(100)

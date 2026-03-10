@@ -7,7 +7,9 @@ Func Play()
 	Local $drug_time = TimerInit()
 	Local $orb_time = TimerInit()
 	Local $janus_time = TimerInit()
+	Local $rune_time = TimerInit()
 	Local $atk_direct = True
+	Local $first_rune = False
 
 	Local $left_x = 40, $left_y = 152
 	Local $right_x = 155, $right_y = 152
@@ -16,8 +18,8 @@ Func Play()
 	Local $janus_1_x = 97, $janus_1_y = 136
 	Local $janus_2_x = 142, $janus_2_y = 136
 	While 1
-		$myLocation = myPosition()
-		$runeLocation = runePosition()
+		$myPosition = myPosition()
+		$runeCheck = runePosition()
 		$left = PixelSearch(0,$left_y-5,$left_x,$left_y+5,$charColor)
 		$right = PixelSearch($right_x,$right_y-5,$right_x+20,$right_y+5,$charColor)
 		If IsArray($left) And $atk_direct == False Then
@@ -29,6 +31,22 @@ Func Play()
 		EndIf
 
 		Select
+			Case (IsArray($runeCheck) And TimerDiff($rune_time) > 15*60*1000) Or $first_rune == True
+				GetRune($runeCheck[0],$runeCheck[1])
+				$rune_check = RuneCheck()
+				If $rune_check == False Then
+					$rune_time = TimerInit()
+					$first_rune = False
+				EndIf
+
+			Case TimerDiff($drug_time) > 30 * 60 * 1000
+				Sleep(500)
+				Send("1")
+				Sleep(500)
+				Send("2")
+				Sleep(500)
+				Send("3")
+				$drug_time = TimerInit()
 			Case TimerDiff($orb_time) > 40000
 				MoveTo($orb_x,$orb_y)
 				turn_right()
@@ -52,7 +70,7 @@ Func Play()
 			Case $atk_direct == True
 				Right_Jump_Atk_au3()
 		EndSelect
-		Sleep(100)
+		Sleep(50)
 	WEnd
 EndFunc
 

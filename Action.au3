@@ -28,6 +28,19 @@ Func showMyPosition()
 	EndIf
 EndFunc
 
+Func RuneCheck()
+	$time = TimerInit()
+	Do
+		jump()
+		Sleep(300)
+		$rune_check = runePosition()
+		If IsArray($rune_check) Then
+			Return True
+		EndIf
+	Until TimerDiff($time) > 2000
+	Return False
+EndFunc
+
 Func turn_left()
 	Send("{LEFT down}")
 	Sleep(50)
@@ -114,7 +127,7 @@ Func GetRune($x,$y)
 			Case $arr[$i] == 3
 				Send("{DOWN}")
 		EndSelect
-		Sleep(500)
+		Sleep(250)
 	Next
 ;~ 		$arr[$i] = Int($arr[$i])
 
@@ -207,7 +220,7 @@ Func MoveTo($x,$y,$move_type="jump")
 				Else
 					Jump_Down()
 				EndIf
-				Sleep(500)
+				Sleep(1000)
 
 			Case $myPosition[1] > $y2_box
 				If $move_type == "flash"  Then

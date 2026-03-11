@@ -80,7 +80,7 @@ EndFunc
 Func Test()
 ;~ 	Left_Jump_Atk_au3()
 ;~ 	turn_left()
-	showMyPosition()
+	Left_Flash_Atk()
 ;~ 	$runePosition = runePosition()
 ;~ 	If IsArray($runePosition) Then
 ;~ 		GetRune($runePosition[0],$runePosition[1])

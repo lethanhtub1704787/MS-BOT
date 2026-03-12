@@ -4,13 +4,14 @@
 
 Global $g_bPaused = False
 
-HotKeySet("{F2}", "Play")
-HotKeySet("{F3}", "Test")
+;~ HotKeySet("{F2}", "Play")
+;~ HotKeySet("{F3}", "Test")
 HotKeySet("{PAUSE}", "TogglePause")
 HotKeySet("{F5}", "Terminate")
 HotKeySet("+!d", "ShowMessage") ; Shift-Alt-d
 
 Run_AI_Server()
+Global $OverWatch = ShellExecute("OverWatch.exe","","","",@SW_HIDE)
 WinMove("[CLASS:MapleStoryClass]", "", 0,0)
 
 While 1
@@ -29,6 +30,7 @@ EndFunc   ;==>TogglePause
 
 Func Terminate()
 	Move_Off()
+	ProcessClose($OverWatch)
 	ProcessClose($AI_Server)
     Exit
 EndFunc   ;==>Terminate

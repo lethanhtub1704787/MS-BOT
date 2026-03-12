@@ -57,6 +57,10 @@ Func Run_AI_Server()
 	$AI_Server = ShellExecute("AI_Server.py","","","",@SW_SHOW)
 EndFunc
 
+Func attack_off()
+	Send("{x up}")
+EndFunc
+
 Func CaptureRegion($savePath, $x1, $y1, $x2, $y2)
     _GDIPlus_Startup()
     Local $bmp = _ScreenCapture_Capture("", $x1, $y1, $x2, $y2)

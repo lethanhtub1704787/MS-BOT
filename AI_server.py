@@ -3,7 +3,7 @@ import os
 import socket
 import time
 from datetime import datetime
-
+# import pyautogui
 import cv2
 
 hwnd = ctypes.windll.kernel32.GetConsoleWindow()
@@ -44,19 +44,19 @@ def SolveRune(image):
         sorted_class_indices = [cls for _, cls in sorted_pairs]
 
         # Lấy thời gian hiện tại và format thành chuỗi
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        # timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-        # Tạo đường dẫn file lưu
+        # # Tạo đường dẫn file lưu
 
-        if num_boxes == 4:
-            save_path = os.path.join("Solved", f"{timestamp}.jpg")
-        else:
-            save_path = os.path.join("Failed", f"{timestamp}.jpg")
+        # if num_boxes == 4:
+        #     save_path = os.path.join("Solved", f"{timestamp}.jpg")
+        # else:
+        #     save_path = os.path.join("Failed", f"{timestamp}.jpg")
 
-        # Lưu ảnh
-        cv2.imwrite(save_path, img)
+        # # Lưu ảnh
+        # cv2.imwrite(save_path, img)
 
-        print(f"Ảnh đã lưu tại: {save_path}")
+        # print(f"Ảnh đã lưu tại: {save_path}")
 
     return sorted_class_indices
 
@@ -70,6 +70,11 @@ def start_server():
         print(f"Server Socket đang chạy tại {HOST}:{PORT}...")
 
         while True:
+            # confirm_appear = pyautogui.locateOnScreen('confirm.png', confidence=0.7)
+            # if confirm_appear:
+            #     center = pyautogui.center(confirm_appear)
+            #     pyautogui.click(center)
+            #     time.sleep(2)
             try:
                 conn, addr = s.accept()
                 with conn:

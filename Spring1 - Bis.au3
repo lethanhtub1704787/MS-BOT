@@ -9,14 +9,14 @@ Func Play()
 	Local $janus_time = TimerInit()
 	Local $rune_time = TimerInit()
 	Local $atk_direct = True
-	Local $first_rune = True
+	Local $first_rune = False
 
 	Local $left_x = 65, $left_y = 151
 	Local $right_x = 160, $right_y = 151
 
 	Local $orb_x = 44, $orb_y = 136
 	Local $janus_1_x = 75, $janus_1_y = 140
-	Local $janus_2_x = 113, $janus_2_y = 140
+	Local $janus_2_x = 110, $janus_2_y = 140
 	Local $janus_3_x = 145, $janus_3_y = 140
 
 	While 1
@@ -44,11 +44,11 @@ Func Play()
 
 			Case TimerDiff($drug_time) > 30 * 60 * 1000
 				Sleep(500)
-				Send("3")
-				Sleep(1000)
-				Send("4")
+				Send("1")
 				Sleep(500)
-				Send("5")
+				Send("2")
+				Sleep(500)
+				Send("3")
 				$drug_time = TimerInit()
 			Case TimerDiff($orb_time) > 40000 And IsArray($left)
 				turn_right()
@@ -59,11 +59,11 @@ Func Play()
 				$orb_time = TimerInit()
 
 			Case TimerDiff($janus_time) > 60000
-				MoveTo($janus_1_x,$janus_1_y)
+				MoveTo($janus_1_x,$janus_1_y,"jump",3)
 				Send("a")
-				MoveTo($janus_2_x,$janus_2_y)
+				MoveTo($janus_2_x,$janus_2_y,"jump",3)
 				Send("a")
-				MoveTo($janus_3_x,$janus_3_y)
+				MoveTo($janus_3_x,$janus_3_y,"jump",3)
 				Send("a")
 				$janus_time = TimerInit()
 
@@ -77,9 +77,11 @@ Func Play()
 	WEnd
 EndFunc
 
-;~ 44,136
-;97,136
-;~ 142,135
+;~ 60,160
+;~ 165,160
+;~ 75,147
+;~ 121,147
+;~ 151,147
 
 
 Func Test()

@@ -16,7 +16,7 @@ Func Play()
 
 	Local $orb_x = 44, $orb_y = 136
 	Local $janus_1_x = 75, $janus_1_y = 140
-	Local $janus_2_x = 110, $janus_2_y = 140
+	Local $janus_2_x = 113, $janus_2_y = 140
 	Local $janus_3_x = 145, $janus_3_y = 140
 
 	While 1
@@ -83,6 +83,6 @@ EndFunc
 
 
 Func Test()
-;~ 	showMyPosition()
-	LittleJumpUp()
+	showMyPosition()
+;~ 	LittleJumpUp()
 EndFunc
